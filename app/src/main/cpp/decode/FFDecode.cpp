@@ -94,7 +94,7 @@ bool FFDecode::Open(XParameter para, bool isHard)
         //initFilter(para);
     }else{
         this->isAudio = true;
-        initFilter(para);
+        ///initFilter(para);
     }
 
     mux.unlock();
@@ -158,7 +158,7 @@ XData FFDecode::RecvFrame()
     {
         //样本字节数 * 单通道样本数 * 通道数
         d.size = av_get_bytes_per_sample((AVSampleFormat)frame->format)*frame->nb_samples*2;
-        filterFrame(frame);
+        //filterFrame(frame);
     }
     d.data = (unsigned char *)frame;
     d.format = frame->format;
@@ -241,11 +241,11 @@ int FFDecode::initFilter(XParameter parameter){
     filters_descr = filters_speed_audio;
 
     //5 将这个filter加入图中
-    ret = avfilter_graph_parse_ptr(filter_graph, filters_descr, &inputs, &outputs, NULL);
-    if (ret < 0) {
-        XLOGE("Cannot avfilter_graph_parse_ptr\n");
-        return ret;
-    }
+//    ret = avfilter_graph_parse_ptr(filter_graph, filters_descr, &inputs, &outputs, NULL);
+//    if (ret < 0) {
+//        XLOGE("Cannot avfilter_graph_parse_ptr\n");
+//        return ret;
+//    }
 
     avfilter_inout_free(&outputs);
     avfilter_inout_free(&inputs);
